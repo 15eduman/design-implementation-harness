@@ -1,0 +1,112 @@
+{
+  "name": "design-implementation-harness",
+  "version": "0.1.0",
+  "source": {
+    "figmaFileKey": "YOUR_FIGMA_FILE_KEY",
+    "sourceNodeId": "SOURCE_NODE_ID",
+    "sourceFrameName": "Source screen name",
+    "sourceFrameSize": {
+      "width": 360,
+      "height": 3387
+    }
+  },
+  "documents": {
+    "moduleSpec": "../docs/HOME_MODULE_SPEC.md",
+    "qaChecklist": "../docs/DESIGN_QA_CHECKLIST.md",
+    "strategy": "../docs/DESIGN_SYSTEM_STRATEGY.md"
+  },
+  "thresholds": {
+    "overallPassScore": 85,
+    "criticalCategoryMinimum": 80,
+    "pixelTolerance": 2,
+    "visualDiffWarning": 92,
+    "visualDiffFailure": 85
+  },
+  "captureDefaults": {
+    "scale": 1,
+    "deviceScaleFactor": 1,
+    "fullPage": false,
+    "background": "source"
+  },
+  "captureCases": [
+    {
+      "id": "source-full-frame",
+      "source": {
+        "kind": "figma",
+        "fileKey": "YOUR_FIGMA_FILE_KEY",
+        "nodeId": "SOURCE_NODE_ID"
+      },
+      "candidate": {
+        "kind": "figma",
+        "nodeId": ""
+      },
+      "capture": {
+        "viewport": {
+          "width": 360,
+          "height": 844
+        },
+        "scale": 1
+      }
+    }
+  ],
+  "sourceRules": [
+    "Do not redraw source modules when source nodes or components are available.",
+    "Use source components, source assets, masks, gradients, and icon instances.",
+    "Only change text, images, order, and component properties unless a new variant is explicitly requested.",
+    "Treat generic style guides as secondary to source module geometry."
+  ],
+  "moduleInventory": [
+    {
+      "name": "TopNavigation",
+      "sourceNodeId": "SOURCE_TOP_NAV_NODE_ID",
+      "targetComponentName": "App/TopNavigation",
+      "critical": true
+    },
+    {
+      "name": "HeroOrSuggestionBanner",
+      "sourceNodeId": "SOURCE_BANNER_NODE_ID",
+      "targetComponentName": "App/HeroOrSuggestionBanner",
+      "critical": true
+    },
+    {
+      "name": "MetricCard",
+      "sourceNodeId": "SOURCE_METRIC_CARD_NODE_ID",
+      "targetComponentName": "App/MetricCard",
+      "critical": true
+    },
+    {
+      "name": "RecommendationCard",
+      "sourceNodeId": "SOURCE_RECOMMENDATION_CARD_NODE_ID",
+      "targetComponentName": "App/RecommendationCard",
+      "critical": true
+    },
+    {
+      "name": "ListCard",
+      "sourceNodeId": "SOURCE_LIST_CARD_NODE_ID",
+      "targetComponentName": "App/ListCard",
+      "critical": true
+    },
+    {
+      "name": "QuickActionGroup",
+      "sourceNodeId": "SOURCE_QUICK_ACTION_GROUP_NODE_ID",
+      "targetComponentName": "App/QuickActionGroup",
+      "critical": false
+    },
+    {
+      "name": "ProductGridSection",
+      "sourceNodeId": "SOURCE_PRODUCT_GRID_NODE_ID",
+      "targetComponentName": "App/ProductGridSection",
+      "critical": false
+    }
+  ],
+  "qaCategories": [
+    "frameRhythm",
+    "cardGeometry",
+    "internalAlignment",
+    "imageSlotFidelity",
+    "typographyHierarchy",
+    "aiLineGrammar",
+    "dataResilience",
+    "sourceComponentReuse"
+  ]
+}

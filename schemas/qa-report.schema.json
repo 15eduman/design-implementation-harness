@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Design QA Report",
+  "type": "object",
+  "required": ["source", "candidate", "overallScore", "categoryScores", "issues", "verdict"],
+  "properties": {
+    "source": {
+      "type": "object",
+      "required": ["figmaFileKey", "nodeId"],
+      "properties": {
+        "figmaFileKey": { "type": "string" },
+        "nodeId": { "type": "string" },
+        "screenshotPath": { "type": "string" }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "required": ["nodeId"],
+      "properties": {
+        "nodeId": { "type": "string" },
+        "screenshotPath": { "type": "string" },
+        "implementationPath": { "type": "string" }
+      }
+    },
+    "overallScore": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "categoryScores": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 100
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["category", "severity", "observed", "expected", "repair"],
+        "properties": {
+          "category": { "type": "string" },
+          "severity": {
+            "type": "string",
+            "enum": ["critical", "major", "minor"]
+          },
+          "observed": { "type": "string" },
+          "expected": { "type": "string" },
+          "likelyCause": { "type": "string" },
+          "repair": { "type": "string" }
+        }
+      }
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["pass", "pass_with_minor_repairs", "needs_repair", "rebuild_from_source"]
+    },
+    "nextStep": { "type": "string" }
+  }
+}
+

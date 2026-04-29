@@ -1,0 +1,59 @@
+agents:
+  source_reader:
+    purpose: Read Figma source metadata, screenshots, and module inventory.
+    inputs:
+      - design-harness.config.json
+      - Figma source node
+    outputs:
+      - module inventory
+      - source screenshot paths
+      - source metadata paths
+    must_not:
+      - redraw modules
+      - infer dimensions without source metadata
+
+  componentizer:
+    purpose: Convert source modules into reusable Figma components.
+    prompt: prompts/componentizer.md
+    inputs:
+      - module inventory
+      - source Figma nodes
+      - HOME_MODULE_SPEC.md
+    outputs:
+      - component node ids
+      - editable properties
+      - locked geometry rules
+
+  composer:
+    purpose: Compose candidate screens using source-backed component instances.
+    prompt: prompts/composer.md
+    inputs:
+      - component inventory
+      - target screen brief
+    outputs:
+      - candidate node id
+      - list of component instances used
+      - known deviations
+
+  visual_qa:
+    purpose: Review source and candidate screenshots with a structured rubric.
+    prompt: prompts/visual-qa.md
+    inputs:
+      - source screenshot
+      - candidate screenshot
+      - module spec
+      - QA checklist
+    outputs:
+      - reports/qa-report.draft.json
+      - repair instructions
+
+  repair:
+    purpose: Apply targeted fixes based on the QA report.
+    prompt: prompts/repair.md
+    inputs:
+      - QA report
+      - candidate node or implementation files
+    outputs:
+      - repair summary
+      - updated candidate screenshot target
+

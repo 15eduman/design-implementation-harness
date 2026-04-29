@@ -1,0 +1,6 @@
+captures/
+reports/qa-report*.json
+*.pyc
+__pycache__/
+.DS_Store
+

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Module Inventory",
+  "type": "object",
+  "required": ["modules"],
+  "properties": {
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "sourceNodeId", "targetComponentName"],
+        "properties": {
+          "name": { "type": "string" },
+          "sourceNodeId": { "type": "string" },
+          "targetComponentName": { "type": "string" },
+          "componentNodeId": { "type": "string" },
+          "critical": { "type": "boolean" },
+          "editableProperties": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "lockedProperties": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "variants": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}
+
