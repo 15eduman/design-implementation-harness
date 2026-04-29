@@ -11,9 +11,10 @@
     }
   },
   "documents": {
-    "moduleSpec": "../docs/HOME_MODULE_SPEC.md",
-    "qaChecklist": "../docs/DESIGN_QA_CHECKLIST.md",
-    "strategy": "../docs/DESIGN_SYSTEM_STRATEGY.md"
+    "moduleSpec": "docs/module-spec.example.md",
+    "qaChecklist": "checklists/visual-fidelity.md",
+    "accessibilityChecklist": "checklists/accessibility.md",
+    "strategy": "docs/design-strategy.example.md"
   },
   "thresholds": {
     "overallPassScore": 85,

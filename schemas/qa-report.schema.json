@@ -30,9 +30,16 @@
     "categoryScores": {
       "type": "object",
       "additionalProperties": {
-        "type": "number",
-        "minimum": 0,
-        "maximum": 100
+        "oneOf": [
+          {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          {
+            "type": "null"
+          }
+        ]
       }
     },
     "issues": {
@@ -60,4 +67,3 @@
     "nextStep": { "type": "string" }
   }
 }
-

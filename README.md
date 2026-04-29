@@ -121,20 +121,29 @@ Source priority:
 ## Directory
 
 ```txt
-design-harness/
+.
   README.md
   README.ko.md
+  CLAUDE.md
+  LICENSE
+  requirements.txt
   design-harness.config.json
   agents.yaml
+  docs/
+    design-strategy.example.md
+    module-spec.example.md
   prompts/
     agent-system.md
+    source-reader.md
     componentizer.md
     composer.md
     visual-qa.md
     repair.md
   checklists/
+    accessibility.md
     visual-fidelity.md
   schemas/
+    component-inventory.schema.json
     qa-report.schema.json
     module-inventory.schema.json
   scripts/
@@ -183,36 +192,43 @@ Set your own source design:
 3. Create a QA report draft.
 
 ```bash
-python3 design-harness/scripts/create_qa_report.py
+python3 scripts/create_qa_report.py
 ```
 
 4. Validate the report shape.
 
 ```bash
-python3 design-harness/scripts/validate_qa_report.py \
+python3 scripts/validate_qa_report.py \
   --allow-draft \
-  design-harness/reports/qa-report.draft.json
+  --strict-categories \
+  reports/qa-report.draft.json
 ```
 
 5. Build an agent prompt packet.
 
 ```bash
-python3 design-harness/scripts/build_agent_packet.py visual_qa
+python3 scripts/build_agent_packet.py visual_qa
 ```
 
 6. Run screenshot diff when you have source and candidate images.
 
 ```bash
-python3 design-harness/scripts/score_visual_diff.py \
-  design-harness/captures/source/home.source.png \
-  design-harness/captures/candidate/home.candidate.png \
-  --out design-harness/captures/diff/home.diff.json
+python3 scripts/score_visual_diff.py \
+  captures/source/home.source.png \
+  captures/candidate/home.candidate.png \
+  --out captures/diff/home.diff.json
 ```
 
 `score_visual_diff.py` requires Pillow:
 
 ```bash
-python3 -m pip install pillow
+python3 -m pip install -r requirements.txt
+```
+
+7. Run the smoke tests.
+
+```bash
+python3 -m unittest discover -s tests
 ```
 
 ## Agent Roles
@@ -223,6 +239,8 @@ Agent roles are described in `agents.yaml`.
 
 Reads Figma source metadata, screenshots, and module candidates. It should not
 redraw or infer source geometry without metadata.
+
+Prompt: `prompts/source-reader.md`
 
 ### Componentizer
 
@@ -251,6 +269,12 @@ Fixes only failed QA categories. It prefers replacing weak reconstructions with
 source-backed components over tuning many pixels by hand.
 
 Prompt: `prompts/repair.md`
+
+## Accessibility
+
+Visual fidelity is not enough. Use `checklists/accessibility.md` alongside
+`checklists/visual-fidelity.md` so candidate screens remain navigable,
+readable, and operable.
 
 ## What This Harness Catches
 
@@ -304,6 +328,24 @@ Example categories:
 - `aiLineGrammar`
 - `dataResilience`
 - `sourceComponentReuse`
+
+Use strict category validation when a config is available:
+
+```bash
+python3 scripts/validate_qa_report.py \
+  --allow-draft \
+  --strict-categories \
+  reports/qa-report.draft.json
+```
+
+Use threshold enforcement for completed reports:
+
+```bash
+python3 scripts/validate_qa_report.py \
+  --strict-categories \
+  --enforce-thresholds \
+  reports/qa-report.json
+```
 
 ## Codex Skill
 

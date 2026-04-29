@@ -164,7 +164,7 @@ contentsOnly: false
 Save the returned image as:
 
 ```txt
-design-harness/captures/source/<case>.source.png
+  captures/source/<case>.source.png
 ```
 
 For component-level comparison, capture the component or module node directly,
@@ -187,7 +187,7 @@ contentsOnly: false
 Save as:
 
 ```txt
-design-harness/captures/candidate/<case>.candidate.png
+  captures/candidate/<case>.candidate.png
 ```
 
 ### Candidate Is A Web App
@@ -204,7 +204,7 @@ fullPage: false unless source is full-page
 Save as:
 
 ```txt
-design-harness/captures/candidate/<case>.candidate.png
+  captures/candidate/<case>.candidate.png
 ```
 
 ### Candidate Is A Native App
@@ -216,10 +216,10 @@ boundary before diffing.
 ## Running The Diff
 
 ```bash
-python3 design-harness/scripts/score_visual_diff.py \
-  design-harness/captures/source/home.source.png \
-  design-harness/captures/candidate/home.candidate.png \
-  --out design-harness/captures/diff/home.diff.json
+python3 scripts/score_visual_diff.py \
+  captures/source/home.source.png \
+  captures/candidate/home.candidate.png \
+  --out captures/diff/home.diff.json
 ```
 
 Output example:
@@ -307,9 +307,9 @@ The Visual QA Agent should receive:
 
 ```json
 {
-  "sourceScreenshot": "design-harness/captures/source/home.source.png",
-  "candidateScreenshot": "design-harness/captures/candidate/home.candidate.png",
-  "diffReport": "design-harness/captures/diff/home.diff.json",
+  "sourceScreenshot": "captures/source/home.source.png",
+  "candidateScreenshot": "captures/candidate/home.candidate.png",
+  "diffReport": "captures/diff/home.diff.json",
   "moduleSpec": "docs/HOME_MODULE_SPEC.md",
   "qaChecklist": "docs/DESIGN_QA_CHECKLIST.md"
 }

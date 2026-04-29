@@ -1,6 +1,7 @@
 agents:
   source_reader:
     purpose: Read Figma source metadata, screenshots, and module inventory.
+    prompt: prompts/source-reader.md
     inputs:
       - design-harness.config.json
       - Figma source node
@@ -56,4 +57,3 @@ agents:
     outputs:
       - repair summary
       - updated candidate screenshot target
-

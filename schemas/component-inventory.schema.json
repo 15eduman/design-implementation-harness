@@ -1,23 +1,22 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Module Inventory",
+  "title": "Component Inventory",
   "type": "object",
-  "anyOf": [
-    { "required": ["modules"] },
-    { "required": ["moduleInventory"] }
-  ],
+  "required": ["components"],
   "properties": {
-    "modules": {
+    "components": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["name", "sourceNodeId", "targetComponentName"],
+        "required": ["name", "sourceNodeId", "componentNodeId"],
         "properties": {
           "name": { "type": "string" },
           "sourceNodeId": { "type": "string" },
-          "targetComponentName": { "type": "string" },
           "componentNodeId": { "type": "string" },
-          "critical": { "type": "boolean" },
+          "variants": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
           "editableProperties": {
             "type": "array",
             "items": { "type": "string" }
@@ -26,19 +25,14 @@
             "type": "array",
             "items": { "type": "string" }
           },
-          "variants": {
-            "type": "array",
-            "items": { "type": "string" }
-          },
           "notes": { "type": "string" }
         }
       }
     },
-    "moduleInventory": {
+    "risks": {
       "type": "array",
-      "items": {
-        "$ref": "#/properties/modules/items"
-      }
+      "items": { "type": "string" }
     }
   }
 }
+
